@@ -1,0 +1,12 @@
+# Virtual Environment(s)
+venv/
+.venv/
+
+# Python Bytecode
+__pycache__/
+.vscode/
+*.pyc
+
+# Environement Variables
+.env
+*.env*

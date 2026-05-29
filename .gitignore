@@ -12,6 +12,7 @@ __pycache__/
 *.env*
 
 # Critical Data Files
+dataset/
 raw/
 
 # Images (Temporarily)

@@ -1,0 +1,44 @@
+# Default training configuration.
+#   python -m engine.train --config engine/configs/default.yaml \
+#       train.epochs=50 optim.lr=5e-4 model.hidden_channels=128
+
+seed: 42
+deterministic: false
+
+data:
+  manifest_path: data/manifest.json
+  mode: velocity          
+  normalize: true
+  batch_size: 16
+  num_workers: 4
+  pin_memory: true
+  drop_last: false
+
+model:
+  name: fno
+  n_modes: [16, 16]
+  in_channels: 2
+  out_channels: 2
+  hidden_channels: 64
+  n_layers: 4
+
+loss:
+  name: h1                # l2 | relative_lp | h1 | mse
+  alpha: 1.0             
+
+optim:
+  name: adamw
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+
+scheduler:
+  name: cosine            # none | step | cosine | plateau
+  T_max: 100              # match train.epochs for a full cosine cycle
+
+train:
+  epochs: 100
+  device: cuda            # cuda | cpu ; falls back to cpu if cuda absent
+  amp: true
+  grad_clip: 1.0
+  log_every: 50
+  ckpt_dir: checkpoints
